@@ -53,6 +53,7 @@ import {
   getEventsForDay,
   getWeekDates,
   getWeeksAtMonth,
+  getDaysInMonth
 } from './utils/dateUtils.ts';
 import { findOverlappingEvents } from './utils/eventOverlap.ts';
 import { getTimeErrorMessage } from './utils/timeValidation.ts';
@@ -140,7 +141,7 @@ function App() {
     editEvent,
   } = useEventForm();
 
-  const { events, saveEvent, deleteEvent, createRepeatEvent, fetchEvents } = useEventOperations(
+  const { events, editEventDateByDrag, saveEvent, deleteEvent, createRepeatEvent, fetchEvents } = useEventOperations(
     Boolean(editingEvent),
     () => setEditingEvent(null)
   );
@@ -374,6 +375,7 @@ function App() {
 
   const renderMonthView = () => {
     const weeks = getWeeksAtMonth(currentDate);
+    // console.log('getWeeksAtMonth', weeks);
 
     return (
       <Stack data-testid="month-view" spacing={4} sx={{ width: '100%' }}>
@@ -397,6 +399,7 @@ function App() {
                     const holiday = holidays[dateString];
 
                     return (
+                      // 드래그앤 드롭 251105
                       <TableCell
                         key={dayIndex}
                         sx={{
@@ -407,6 +410,45 @@ function App() {
                           border: '1px solid #e0e0e0',
                           overflow: 'hidden',
                           position: 'relative',
+                        }}
+                        data-testid="table-cell"
+                        data-week-index={weekIndex}
+                        data-day-index={dayIndex}
+                        className="drag-target"
+                        onDragOver={(e) => {
+                          e.preventDefault(); // drop 가능하도록
+                        }}
+                        onDrop={async (e) => {
+                          e.preventDefault();
+
+                          const draggedEventId = e.dataTransfer.getData("eventId");
+                          const weekIndex = e.currentTarget.getAttribute("data-week-index");
+                          const dayIndex = e.currentTarget.getAttribute("data-day-index");
+
+                          // const event = await editEventDateByDrag(draggedEventId)
+                          // let event = {};
+
+                          console.log("드래그된 eventId:", draggedEventId);
+                          console.log("드롭 weekIndex:", weekIndex);
+                          console.log("드롭 dayIndex:", dayIndex);
+                          console.log("currentDay:", currentDate);
+                          // console.log(event);
+
+                          let week = weeks[weekIndex];
+                          let day = week[dayIndex];
+                          console.log(day);
+
+                          //// 함수 구분선
+                          let targetDate = '';
+                          let [yyyy, mm] = formatMonth(currentDate).split(/[가-힣]/).map(v => v.trim()).filter(Boolean)
+                          // let {y,m,d} = event.date.split("-")
+                          if(day !== null) {
+                            targetDate = `${yyyy}-${mm}-${day < 10 ? `0${day}` : day}`;
+                            editEventDateByDrag({id: draggedEventId, date: targetDate})
+                          }
+                          // else {
+                          //   let fullDate = getDaysInMonth(Number(yyyy), Number(mm) - 1)
+                          // }
                         }}
                       >
                         {day && (
@@ -437,8 +479,19 @@ function App() {
                                     width: '100%',
                                     overflow: 'hidden',
                                   }}
+                                  data-testid="table-box"
                                 >
-                                  <Stack direction="row" spacing={1} alignItems="center">
+                                  <Stack
+                                    direction="row"
+                                    spacing={1}
+                                    alignItems="center"
+                                    draggable={true}
+                                    data-event-id={event.id}
+                                    onDragStart={(e) => {
+                                      e.dataTransfer.setData("eventId", event.id);
+                                      console.log("드래그 시작 eventId:", event.id);
+                                    }}
+                                  >
                                     {isNotified && <Notifications fontSize="small" />}
                                     {/* ! TEST CASE */}
                                     {isRepeating && (

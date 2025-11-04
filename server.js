@@ -24,6 +24,29 @@ app.get('/api/events', async (_, res) => {
   res.json(events);
 });
 
+// 드래그앤 드롭 251105
+app.put('/api/events/drag', async (req, res) => {
+  const events = await getEvents();
+  const { id, date } = req.body;
+  const idx = events.events.findIndex(evt=>evt.id === id)
+  console.log(id, date);
+  if(idx > -1){
+    const newEvents = [...events.events];
+    newEvents[idx].date = date
+
+    fs.writeFileSync(
+      `${__dirname}/src/__mocks__/response/${dbName}`,
+      JSON.stringify({
+        events: newEvents,
+      })
+    );
+    res.json(events.events[idx]);
+  }
+  else{
+    res.status(404).send('Event not found');
+  }
+});
+
 app.post('/api/events', async (req, res) => {
   const events = await getEvents();
   const newEvent = { id: randomUUID(), ...req.body };
