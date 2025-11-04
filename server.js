@@ -28,11 +28,11 @@ app.get('/api/events', async (_, res) => {
 app.put('/api/events/drag', async (req, res) => {
   const events = await getEvents();
   const { id, date } = req.body;
-  const idx = events.events.findIndex(evt=>evt.id === id)
+  const idx = events.events.findIndex(evt => evt.id === id);
   console.log(id, date);
-  if(idx > -1){
+  if (idx > -1) {
     const newEvents = [...events.events];
-    newEvents[idx].date = date
+    newEvents[idx] = { ...newEvents[idx], date };
 
     fs.writeFileSync(
       `${__dirname}/src/__mocks__/response/${dbName}`,
@@ -40,9 +40,8 @@ app.put('/api/events/drag', async (req, res) => {
         events: newEvents,
       })
     );
-    res.json(events.events[idx]);
-  }
-  else{
+    res.json(newEvents[idx]);
+  } else {
     res.status(404).send('Event not found');
   }
 });

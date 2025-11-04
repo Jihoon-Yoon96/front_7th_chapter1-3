@@ -40,19 +40,19 @@ export const useEventOperations = (editing: boolean, onSave?: () => void) => {
   // 드래그앤 드롭 251105
   const editEventDateByDrag = async (eventInfo: Partial<Event>) => {
     try {
-      // const response = await fetch(`/api/events/${eventId}`);
       const response = await fetch(`/api/events/drag`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventInfo),
       });
       if (!response.ok) {
-        throw new Error('Failed to fetch event detail');
+        throw new Error('Failed to update event by drag');
       }
-      const event = await response.json();
-      return event;
+      await fetchEvents();
+      enqueueSnackbar('일정이 이동되었습니다.', { variant: 'success' });
     } catch (error) {
       console.error('Error fetching event detail:', error);
+      enqueueSnackbar('일정 이동을 실패했습니다.', { variant: 'error' });
     }
   };
 
