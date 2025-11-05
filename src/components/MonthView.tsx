@@ -71,8 +71,6 @@ const MonthView: React.FC<MonthViewProps> = ({
                         position: 'relative',
                       }}
                       data-testid="table-cell"
-                      data-week-index={weekIndex}
-                      data-day-index={dayIndex}
                       className="drag-target"
                       onDragOver={(e) => {
                         e.preventDefault();

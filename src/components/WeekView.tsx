@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { Event, RepeatType } from '../types';
-import { formatWeek, getWeekDates } from '../utils/dateUtils';
+import { formatMonth, formatWeek, getWeekDates } from '../utils/dateUtils';
 
 // Copied from App.tsx
 const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -27,6 +27,7 @@ interface WeekViewProps {
   currentDate: Date;
   filteredEvents: Event[];
   notifiedEvents: string[];
+  editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
   getRepeatTypeLabel: (type: RepeatType) => string;
 }
 
@@ -34,6 +35,7 @@ const WeekView: React.FC<WeekViewProps> = ({
   currentDate,
   filteredEvents,
   notifiedEvents,
+  editEventDateByDrag,
   getRepeatTypeLabel,
 }) => {
   const weekDates = getWeekDates(currentDate);
@@ -53,7 +55,7 @@ const WeekView: React.FC<WeekViewProps> = ({
           </TableHead>
           <TableBody>
             <TableRow>
-              {weekDates.map((date) => (
+              {weekDates.map((date, dayIndex) => (
                 <TableCell
                   key={date.toISOString()}
                   sx={{
@@ -64,6 +66,25 @@ const WeekView: React.FC<WeekViewProps> = ({
                     border: '1px solid #e0e0e0',
                     overflow: 'hidden',
                   }}
+                  data-testid="table-cell"
+                  className="drag-target"
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                  }}
+                  onDrop={async (e) => {
+                    e.preventDefault();
+                    const draggedEventId = e.dataTransfer.getData('eventId');
+                    console.log(date, draggedEventId);
+                    let year = date.getFullYear();
+                    let month = date.getMonth()+1;
+                    if (month < 10) {
+                      month = `0${month}`;
+                    };
+                    let day = date.getDate();
+                    const targetDate = `${year}-${month}-${day < 10 ? `0${day}` : day}`;
+                    console.log(targetDate);
+                    await editEventDateByDrag({ id: draggedEventId, date: targetDate });
+                  }}
                 >
                   <Typography variant="body2" fontWeight="bold">
                     {date.getDate()}
@@ -73,7 +94,6 @@ const WeekView: React.FC<WeekViewProps> = ({
                     .map((event) => {
                       const isNotified = notifiedEvents.includes(event.id);
                       const isRepeating = event.repeat.type !== 'none';
-
                       return (
                         <Box
                           key={event.id}
@@ -82,7 +102,16 @@ const WeekView: React.FC<WeekViewProps> = ({
                             ...(isNotified ? eventBoxStyles.notified : eventBoxStyles.normal),
                           }}
                         >
-                          <Stack direction="row" spacing={1} alignItems="center">
+                          <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                            draggable={true}
+                            data-event-id={event.id}
+                            onDragStart={(e) => {
+                              e.dataTransfer.setData('eventId', event.id);
+                            }}
+                          >
                             {isNotified && <Notifications fontSize="small" />}
                             {isRepeating && (
                               <Tooltip

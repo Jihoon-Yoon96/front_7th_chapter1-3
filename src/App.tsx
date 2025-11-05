@@ -254,6 +254,7 @@ function App() {
               currentDate={currentDate}
               filteredEvents={filteredEvents}
               notifiedEvents={notifiedEvents}
+              editEventDateByDrag={editEventDateByDrag}
               getRepeatTypeLabel={getRepeatTypeLabel}
             />
           )}
