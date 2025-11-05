@@ -29,6 +29,7 @@ interface WeekViewProps {
   notifiedEvents: string[];
   editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
   getRepeatTypeLabel: (type: RepeatType) => string;
+  handleEditEvent: (event: Event) => void;
 }
 
 const WeekView: React.FC<WeekViewProps> = ({
@@ -37,6 +38,7 @@ const WeekView: React.FC<WeekViewProps> = ({
   notifiedEvents,
   editEventDateByDrag,
   getRepeatTypeLabel,
+  handleEditEvent,
 }) => {
   const weekDates = getWeekDates(currentDate);
   return (
@@ -95,12 +97,15 @@ const WeekView: React.FC<WeekViewProps> = ({
                       const isNotified = notifiedEvents.includes(event.id);
                       const isRepeating = event.repeat.type !== 'none';
                       return (
+                        // 이벤트 표기 영역
                         <Box
                           key={event.id}
                           sx={{
                             ...eventBoxStyles.common,
                             ...(isNotified ? eventBoxStyles.notified : eventBoxStyles.normal),
+                            cursor: 'pointer',
                           }}
+                          onClick={() => handleEditEvent(event)}
                         >
                           <Stack
                             direction="row"

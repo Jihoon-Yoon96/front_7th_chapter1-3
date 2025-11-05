@@ -25,6 +25,7 @@ interface MonthViewProps {
   holidays: Record<string, string>;
   editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
   getRepeatTypeLabel: (type: RepeatType) => string;
+  handleEditEvent: (event: Event) => void;
 }
 
 const MonthView: React.FC<MonthViewProps> = ({
@@ -34,6 +35,7 @@ const MonthView: React.FC<MonthViewProps> = ({
   holidays,
   editEventDateByDrag,
   getRepeatTypeLabel,
+  handleEditEvent,
 }) => {
   const weeks = getWeeksAtMonth(currentDate);
 
@@ -103,6 +105,7 @@ const MonthView: React.FC<MonthViewProps> = ({
                             const isRepeating = event.repeat.type !== 'none';
 
                             return (
+                              // 이벤트 표기 영역
                               <Box
                                 key={event.id}
                                 sx={{
@@ -115,8 +118,10 @@ const MonthView: React.FC<MonthViewProps> = ({
                                   minHeight: '18px',
                                   width: '100%',
                                   overflow: 'hidden',
+                                  cursor: 'pointer',
                                 }}
                                 data-testid="table-box"
+                                onClick={() => handleEditEvent(event)}
                               >
                                 <Stack
                                   direction="row"

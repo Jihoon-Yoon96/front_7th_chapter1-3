@@ -256,6 +256,7 @@ function App() {
               notifiedEvents={notifiedEvents}
               editEventDateByDrag={editEventDateByDrag}
               getRepeatTypeLabel={getRepeatTypeLabel}
+              handleEditEvent={handleEditEvent}
             />
           )}
           {view === 'month' && (
@@ -266,6 +267,7 @@ function App() {
               holidays={holidays}
               editEventDateByDrag={editEventDateByDrag}
               getRepeatTypeLabel={getRepeatTypeLabel}
+              handleEditEvent={handleEditEvent}
             />
           )}
         </Stack>
