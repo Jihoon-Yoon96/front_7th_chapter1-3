@@ -24,6 +24,19 @@ app.get('/api/events', async (_, res) => {
   res.json(events);
 });
 
+// 클릭 시 이벤트 폼에 양식 채우기
+app.get('/api/events/:id', async (req, res) => {
+  const events = await getEvents();
+  const id = req.params.id;
+  const eventIndex = events.events.findIndex((event) => event.id === id);
+  if (eventIndex > -1) {
+    res.json(events.events[eventIndex]);
+  }
+  else{
+    res.status(404).send('Event not found');
+  }
+});
+
 // 드래그앤 드롭 251105
 app.put('/api/events/drag', async (req, res) => {
   const events = await getEvents();

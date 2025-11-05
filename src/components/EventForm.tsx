@@ -15,7 +15,6 @@ import React from 'react';
 import { Event, RepeatType } from '../types';
 
 interface EventFormProps {
-  // from useEventForm
   title: string;
   setTitle: (title: string) => void;
   date: string;

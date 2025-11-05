@@ -37,6 +37,23 @@ export const useEventOperations = (editing: boolean, onSave?: () => void) => {
     }
   };
 
+  // 클릭 시 이벤트 폼 채우기
+  const getEventDetail = async (id: string) => {
+    try {
+      const response = await fetch(`/api/events/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch events');
+      }
+      const { events } = await response.json();
+      console.log(events);
+      // setEvents(events);
+      return events;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      enqueueSnackbar(ERROR_MESSAGES.FETCH_FAILED, { variant: 'error' });
+    }
+  };
+
   // 드래그앤 드롭 251105
   const editEventDateByDrag = async (eventInfo: Partial<Event>) => {
     try {
