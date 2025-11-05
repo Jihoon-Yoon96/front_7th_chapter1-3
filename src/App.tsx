@@ -193,6 +193,10 @@ function App() {
       notificationTime,
     };
 
+    if (isRepeating) {
+      await proceedSave(eventData);
+      return;
+    }
     const overlapping = findOverlappingEvents(eventData, events);
     const hasOverlapEvent = overlapping.length > 0;
 
