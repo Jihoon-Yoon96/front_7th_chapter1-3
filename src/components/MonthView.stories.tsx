@@ -2,113 +2,153 @@ import type { Meta, StoryObj } from '@storybook/react';
 import MonthView from './MonthView';
 import { Event, RepeatType } from '../types';
 
-// Storybook에서 컴포넌트를 어떻게 표시할지 정의합니다.
 const meta: Meta<typeof MonthView> = {
   title: 'Components/MonthView',
   component: MonthView,
   tags: ['autodocs'],
   argTypes: {
     currentDate: { control: 'date' },
-    filteredEvents: { control: 'object' },
-    holidays: { control: 'object' },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof MonthView>;
 
-// Mock 데이터: 실제 애플리케이션에서 받아오는 데이터 대신 사용할 가짜 데이터입니다.
-const sampleEvents: Event[] = [
-  {
-    id: '1',
-    title: '일반 일정',
-    date: '2025-11-10',
-    startTime: '10:00',
-    endTime: '11:00',
-    repeat: { type: 'none' },
-  },
-  {
-    id: '2',
-    title: '반복 일정',
-    date: '2025-11-12',
-    startTime: '14:00',
-    endTime: '15:00',
-    repeat: { type: 'daily', interval: 1 },
-  },
-  {
-    id: '3',
-    title: '아주 긴 제목을 가진 일반 일정 테스트',
-    date: '2025-11-15',
-    startTime: '16:00',
-    endTime: '17:00',
-    repeat: { type: 'none' },
-  },
-];
+// --- Mock Data --- //
+const generalEvent: Event = {
+  id: '1',
+  title: '일반 일정',
+  date: '2025-11-10',
+  startTime: '10:00',
+  endTime: '11:00',
+  repeat: { type: 'none' },
+};
+
+const recurringEvent: Event = {
+  id: '2',
+  title: '반복 일정',
+  date: '2025-11-12',
+  startTime: '14:00',
+  endTime: '15:00',
+  repeat: { type: 'daily', interval: 1 },
+};
+
+const longTitleEvent: Event = {
+  id: '3',
+  title: '아주 긴 제목을 가진 일반 일정 테스트',
+  date: '2025-11-15',
+  startTime: '16:00',
+  endTime: '17:00',
+  repeat: { type: 'none' },
+};
 
 const sampleHolidays = {
   '2025-11-11': '빼빼로데이',
 };
 
-// Storybook에서 사용할 함수 Mock
+// --- Helper Functions --- //
 const getRepeatTypeLabel = (type: RepeatType) => {
   switch (type) {
-    case 'daily':
-      return '일';
-    case 'weekly':
-      return '주';
-    case 'monthly':
-      return '개월';
-    case 'yearly':
-      return '년';
-    default:
-      return '';
+    case 'daily': return '일';
+    case 'weekly': return '주';
+    case 'monthly': return '개월';
+    case 'yearly': return '년';
+    default: return '';
   }
 };
 
-// 기본 스토리를 정의합니다.
+const renderStory = (args: any) => {
+  const storyArgs = {
+    ...args,
+    currentDate: new Date(args.currentDate),
+  };
+  return <MonthView {...storyArgs} />;
+};
+
+// --- Base Story Args --- //
+const baseArgs = {
+  currentDate: new Date('2025-11-01'),
+  // editEventDateByDrag: async (eventInfo: any) => console.log('Event dragged:', eventInfo),
+  getRepeatTypeLabel: getRepeatTypeLabel,
+  handleEditEvent: (event: any) => console.log('Editing event:', event),
+};
+
+// --- Stories --- //
+
 export const Default: Story = {
+  name: 'Default (Mixed)',
   args: {
-    currentDate: new Date('2025-11-01'),
-    filteredEvents: sampleEvents,
+    ...baseArgs,
+    filteredEvents: [generalEvent, recurringEvent, longTitleEvent],
     notifiedEvents: [],
     holidays: sampleHolidays,
-    editEventDateByDrag: async (eventInfo) => {
-      console.log('Event dragged:', eventInfo);
-    },
-    getRepeatTypeLabel: getRepeatTypeLabel,
-    handleEditEvent: (event) => {
-      console.log('Editing event:', event);
-    },
   },
-  render: (args) => {
-    // Storybook 컨트롤에서 날짜를 변경하면 문자열로 전달되므로, Date 객체로 변환해줍니다.
-    const storyArgs = {
-      ...args,
-      currentDate: new Date(args.currentDate),
-    };
-    return <MonthView {...storyArgs} />;
+  render: renderStory,
+};
+
+export const OnlyGeneralEvent: Story = {
+  args: {
+    ...baseArgs,
+    filteredEvents: [generalEvent, longTitleEvent],
+    notifiedEvents: [],
+    holidays: {},
   },
+  render: renderStory,
+};
+
+export const OnlyRecurringEvent: Story = {
+  args: {
+    ...baseArgs,
+    filteredEvents: [recurringEvent],
+    notifiedEvents: [],
+    holidays: {},
+  },
+  render: renderStory,
+};
+
+export const OnlyHolidays: Story = {
+  args: {
+    ...baseArgs,
+    filteredEvents: [],
+    notifiedEvents: [],
+    holidays: sampleHolidays,
+  },
+  render: renderStory,
+};
+
+const manyEvents: Event[] = [
+  generalEvent,
+  { id: '4', title: '추가 이벤트 1', date: '2025-11-10', startTime: '12:00', endTime: '13:00', repeat: { type: 'none' } },
+  { id: '5', title: '추가 이벤트 2', date: '2025-11-10', startTime: '13:00', endTime: '14:00', repeat: { type: 'none' } },
+  { id: '6', title: '추가 이벤트 3', date: '2025-11-10', startTime: '15:00', endTime: '16:00', repeat: { type: 'none' } },
+];
+
+export const WithManyEvents: Story = {
+  args: {
+    ...baseArgs,
+    filteredEvents: manyEvents,
+    notifiedEvents: [],
+    holidays: {},
+  },
+  render: renderStory,
+};
+
+export const WithNotifiedEvents: Story = {
+  args: {
+    ...baseArgs,
+    filteredEvents: [generalEvent, recurringEvent],
+    notifiedEvents: ['1'], // generalEvent (id: '1')를 알림 상태로 설정
+    holidays: {},
+  },
+  render: renderStory,
 };
 
 export const Empty: Story = {
   args: {
-    currentDate: new Date('2025-11-01'),
+    ...baseArgs,
     filteredEvents: [],
     notifiedEvents: [],
     holidays: {},
-    editEventDateByDrag: async (eventInfo) => {
-      console.log('Event dragged:', eventInfo);
-    },
-    getRepeatTypeLabel: getRepeatTypeLabel,
-    handleEditEvent: (event) => {
-      console.log('Editing event:', event);
-    },
   },
-  render: (args) => {
-    const storyArgs = {
-      ...args,
-      currentDate: new Date(args.currentDate),
-    };
-    return <MonthView {...storyArgs} />;
-  },
+  render: renderStory,
 };
