@@ -13,7 +13,7 @@ test('getting started should contain table of contents', async ({ page }) => {
     `Write tests using web-first assertions, fixtures and locators`,
     `Run single or multiple tests; headed mode`,
     `Generate tests with Codegen`,
-    `View a trace of your tests`
+    `View a trace of your tests`,
   ]);
 });
 
