@@ -2,14 +2,12 @@ import { Box, Stack, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 
-import CalendarHeader from './components/CalendarHeader.tsx';
+import Calendar from './components/Calendar.tsx';
 import EventForm from './components/EventForm.tsx';
 import EventList from './components/EventList.tsx';
-import MonthView from './components/MonthView.tsx';
 import NotificationCenter from './components/NotificationCenter.tsx';
 import OverlapDialog from './components/OverlapDialog.tsx';
 import RecurringEventDialog from './components/RecurringEventDialog.tsx';
-import WeekView from './components/WeekView.tsx';
 import { useCalendarView } from './hooks/useCalendarView.ts';
 import { useEventForm } from './hooks/useEventForm.ts';
 import { useEventOperations } from './hooks/useEventOperations.ts';
@@ -242,34 +240,19 @@ function App() {
         <Stack flex={1} spacing={5}>
           <Typography variant="h4">일정 보기</Typography>
 
-          <CalendarHeader
+          <Calendar
             view={view}
             setView={setView}
             onPrev={() => navigate('prev')}
             onNext={() => navigate('next')}
+            currentDate={currentDate}
+            events={filteredEvents}
+            notifiedEvents={notifiedEvents}
+            holidays={holidays}
+            editEventDateByDrag={editEventDateByDrag}
+            getRepeatTypeLabel={getRepeatTypeLabel}
+            handleEditEvent={handleEditEvent}
           />
-
-          {view === 'week' && (
-            <WeekView
-              currentDate={currentDate}
-              filteredEvents={filteredEvents}
-              notifiedEvents={notifiedEvents}
-              editEventDateByDrag={editEventDateByDrag}
-              getRepeatTypeLabel={getRepeatTypeLabel}
-              handleEditEvent={handleEditEvent}
-            />
-          )}
-          {view === 'month' && (
-            <MonthView
-              currentDate={currentDate}
-              filteredEvents={filteredEvents}
-              notifiedEvents={notifiedEvents}
-              holidays={holidays}
-              editEventDateByDrag={editEventDateByDrag}
-              getRepeatTypeLabel={getRepeatTypeLabel}
-              handleEditEvent={handleEditEvent}
-            />
-          )}
         </Stack>
 
         <EventList
