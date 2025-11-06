@@ -18,8 +18,8 @@ test.describe('반복 일정 CRUD', () => {
   test('반복 일정 생성', async ({ page }) => {
     await page.getByLabel('제목').fill('팀 회의');
     await page.getByLabel('날짜').fill('2025-11-07');
-    await page.getByLabel('시작 시간').fill('10:00');
-    await page.getByLabel('종료 시간').fill('11:00');
+    await page.getByLabel('시작 시간').fill('09:00');
+    await page.getByLabel('종료 시간').fill('10:00');
 
     await page.getByLabel('반복 일정').check();
     await page.getByLabel('반복 유형').click();
@@ -44,8 +44,8 @@ test.describe('반복 일정 CRUD', () => {
   test('반복 일정 수정 - 단일수정', async ({ page }) => {
     await page.getByLabel('제목').fill('팀 회의');
     await page.getByLabel('날짜').fill('2025-11-07');
-    await page.getByLabel('시작 시간').fill('10:00');
-    await page.getByLabel('종료 시간').fill('11:00');
+    await page.getByLabel('시작 시간').fill('09:00');
+    await page.getByLabel('종료 시간').fill('10:00');
 
     await page.getByLabel('반복 일정').check();
     await page.getByLabel('반복 유형').click();
@@ -74,8 +74,8 @@ test.describe('반복 일정 CRUD', () => {
   test('반복 일정 수정 - 일괄수정', async ({ page }) => {
     await page.getByLabel('제목').fill('팀 회의');
     await page.getByLabel('날짜').fill('2025-11-07');
-    await page.getByLabel('시작 시간').fill('10:00');
-    await page.getByLabel('종료 시간').fill('11:00');
+    await page.getByLabel('시작 시간').fill('09:00');
+    await page.getByLabel('종료 시간').fill('10:00');
 
     await page.getByLabel('반복 일정').check();
     await page.getByLabel('반복 유형').click();
@@ -106,8 +106,8 @@ test.describe('반복 일정 CRUD', () => {
   test('반복 일정 삭제 - 일괄삭제', async ({ page }) => {
     await page.getByLabel('제목').fill('팀 회의');
     await page.getByLabel('날짜').fill('2025-11-07');
-    await page.getByLabel('시작 시간').fill('10:00');
-    await page.getByLabel('종료 시간').fill('11:00');
+    await page.getByLabel('시작 시간').fill('09:00');
+    await page.getByLabel('종료 시간').fill('10:00');
 
     await page.getByLabel('반복 일정').check();
     await page.getByLabel('반복 유형').click();

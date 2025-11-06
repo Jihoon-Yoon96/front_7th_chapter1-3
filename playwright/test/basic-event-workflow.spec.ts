@@ -1,12 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import {
-  createEvent,
-  findEventByTitle,
-  expectSnackbarMessage,
-  goReset,
-  switchView,
-} from './e2eHelpers';
+import { createEvent, findEventByTitle, expectSnackbarMessage, goReset, switchView } from './e2eHelpers';
 
 test.describe('기본 일정 관리', () => {
   // 테스트 병렬실행 방지
