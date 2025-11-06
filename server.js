@@ -13,6 +13,16 @@ app.use(express.json());
 
 const dbName = process.env.TEST_ENV === 'e2e' ? 'e2e.json' : 'realEvents.json';
 
+// E2E 테스트용 DB 초기화 엔드포인트
+app.post('/api/reset', async (req, res) => {
+  // E2E 환경에서만 동작
+  fs.writeFileSync(
+    `${__dirname}/src/__mocks__/response/${dbName}`,
+    JSON.stringify({ events: [] })
+  );
+  res.status(200).json({ message: 'Database reset successfully' });
+});
+
 const getEvents = async () => {
   const data = await readFile(`${__dirname}/src/__mocks__/response/${dbName}`, 'utf8');
 

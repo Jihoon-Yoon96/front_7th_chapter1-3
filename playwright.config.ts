@@ -46,5 +46,20 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
       timeout: 10 * 1000,
     },
+    {
+      /* API 서버: E2E 모드로 실행 */
+      command: 'TEST_ENV=e2e node server.js',
+      url: 'http://localhost:3000/api/events',
+      reuseExistingServer: !process.env.CI,
+      env: {
+        TEST_ENV: 'e2e',
+      },
+    },
+    {
+      /* Vite 개발 서버 */
+      command: 'pnpm start',
+      url: 'http://localhost:5173',
+      reuseExistingServer: !process.env.CI,
+    },
   ],
 })
