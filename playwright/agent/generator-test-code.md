@@ -3,8 +3,8 @@
 
 ---
 ### 0. 역할
-- **PRD.md를 참고하여** 실행 가능한 Playwright 테스트 코드로 변환합니다.
-  Input: PRD.md (시나리오 1.1)  
+- **PRD.md를 참고하여** 실행 가능한 Playwright 테스트 코드로 변환합니다.  
+  Input: ./playwright/agent/PRD.md && ./playwright/PLAYWRIGHT_GUIDE.md   
   Output:  
   ./playwright/pom/CalendarPage.ts (페이지 객체 모델)  
   ./playwright/test/basic-event-create.spec.ts (테스트 스크립트)
