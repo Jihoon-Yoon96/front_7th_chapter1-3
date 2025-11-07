@@ -75,7 +75,7 @@ const getRepeatTypeLabel = (type: RepeatType) => {
   }
 };
 
-const renderStory = (args: any) => {
+const renderStory = (args: unknown) => {
   const storyArgs = {
     ...args,
     currentDate: new Date(args.currentDate),
@@ -88,9 +88,9 @@ const baseArgs = {
   onPrev: () => console.log('Prev clicked'),
   onNext: () => console.log('Next clicked'),
   setView: (view: CalendarView) => console.log('Set view to:', view),
-  editEventDateByDrag: async (eventInfo: any) => console.log('Event dragged:', eventInfo),
+  editEventDateByDrag: async () => console.log('Event dragged:'),
   getRepeatTypeLabel: getRepeatTypeLabel,
-  handleEditEvent: (event: any) => console.log('Editing event:', event),
+  // handleEditEvent: (event: any) => console.log('Editing event:', event),
 };
 
 // --- Stories --- //

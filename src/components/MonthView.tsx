@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-import { Event, RepeatType } from '../types';
+import { Event } from '../types';
 import { formatDate, formatMonth, getEventsForDay, getWeeksAtMonth } from '../utils/dateUtils';
 
 // Copied from App.tsx
@@ -24,9 +24,9 @@ interface MonthViewProps {
   filteredEvents: Event[];
   notifiedEvents: string[];
   holidays: Record<string, string>;
-  editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
-  getRepeatTypeLabel: (type: RepeatType) => string;
-  handleEditEvent: (event: Event) => void;
+  editEventDateByDrag: () => Promise<void>;
+  getRepeatTypeLabel: () => string;
+  handleEditEvent: () => void;
 }
 
 const MonthView: React.FC<MonthViewProps> = ({

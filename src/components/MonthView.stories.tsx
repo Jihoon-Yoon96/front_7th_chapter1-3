@@ -63,7 +63,7 @@ const getRepeatTypeLabel = (type: RepeatType) => {
   }
 };
 
-const renderStory = (args: any) => {
+const renderStory = (args: unknown) => {
   const storyArgs = {
     ...args,
     currentDate: new Date(args.currentDate),
@@ -76,7 +76,7 @@ const baseArgs = {
   currentDate: new Date('2025-11-01'),
   // editEventDateByDrag: async (eventInfo: any) => console.log('Event dragged:', eventInfo),
   getRepeatTypeLabel: getRepeatTypeLabel,
-  handleEditEvent: (event: any) => console.log('Editing event:', event),
+  // handleEditEvent: (event: any) => console.log('Editing event:', event),
 };
 
 // --- Stories --- //

@@ -30,10 +30,7 @@ const DEFAULT_REPEAT_CONFIG = {
  * Custom hook for managing recurring event operations
  * Provides functionality for editing and deleting recurring events
  */
-export const useRecurringEventOperations = (
-  events: Event[],
-  updateEvents: (events: Event[]) => void
-) => {
+export const useRecurringEventOperations = (events: Event[], updateEvents: () => void) => {
   const isRecurringEvent = (event: Event): boolean => {
     return event.repeat.type !== 'none' && event.repeat.interval > 0;
   };

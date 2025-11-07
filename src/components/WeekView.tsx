@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-import { Event, RepeatType } from '../types';
-import { formatMonth, formatWeek, getWeekDates } from '../utils/dateUtils';
+import { Event } from '../types';
+import { formatWeek, getWeekDates } from '../utils/dateUtils';
 
 // Copied from App.tsx
 const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -35,9 +35,9 @@ interface WeekViewProps {
   currentDate: Date;
   filteredEvents: Event[];
   notifiedEvents: string[];
-  editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
-  getRepeatTypeLabel: (type: RepeatType) => string;
-  handleEditEvent: (event: Event) => void;
+  editEventDateByDrag: () => Promise<void>;
+  getRepeatTypeLabel: () => string;
+  handleEditEvent: () => void;
 }
 
 const WeekView: React.FC<WeekViewProps> = ({
@@ -65,7 +65,7 @@ const WeekView: React.FC<WeekViewProps> = ({
           </TableHead>
           <TableBody>
             <TableRow>
-              {weekDates.map((date, dayIndex) => (
+              {weekDates.map((date) => (
                 <TableCell
                   key={date.toISOString()}
                   sx={{

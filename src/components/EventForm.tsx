@@ -17,32 +17,32 @@ import { Event, RepeatType } from '../types';
 
 interface EventFormProps {
   title: string;
-  setTitle: (title: string) => void;
+  setTitle: () => void;
   date: string;
-  setDate: (date: string) => void;
+  setDate: () => void;
   startTime: string;
   endTime: string;
   description: string;
-  setDescription: (description: string) => void;
+  setDescription: () => void;
   location: string;
-  setLocation: (location: string) => void;
+  setLocation: () => void;
   category: string;
-  setCategory: (category: string) => void;
+  setCategory: () => void;
   isRepeating: boolean;
-  setIsRepeating: (isRepeating: boolean) => void;
+  setIsRepeating: () => void;
   repeatType: RepeatType;
-  setRepeatType: (type: RepeatType) => void;
+  setRepeatType: () => void;
   repeatInterval: number;
-  setRepeatInterval: (interval: number) => void;
+  setRepeatInterval: () => void;
   repeatEndDate: string;
-  setRepeatEndDate: (date: string) => void;
+  setRepeatEndDate: () => void;
   notificationTime: number;
-  setNotificationTime: (time: number) => void;
+  setNotificationTime: () => void;
   startTimeError: string | null;
   endTimeError: string | null;
   editingEvent: Event | null;
-  handleStartTimeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEndTimeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleStartTimeChange: () => void;
+  handleEndTimeChange: () => void;
   // from App.tsx
   addOrUpdateEvent: () => Promise<void>;
   // constants

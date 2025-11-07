@@ -59,7 +59,7 @@ const getRepeatTypeLabel = (type: RepeatType) => {
   }
 };
 
-const renderStory = (args: any) => {
+const renderStory = (args: unknown) => {
   const storyArgs = {
     ...args,
     currentDate: new Date(args.currentDate),
@@ -70,9 +70,9 @@ const renderStory = (args: any) => {
 // --- Base Story Args --- //
 const baseArgs = {
   currentDate: new Date('2025-11-03'), // 2025년 11월 첫째 주 (월요일)
-  editEventDateByDrag: async (eventInfo: any) => console.log('Event dragged:', eventInfo),
+  editEventDateByDrag: async () => console.log('Event dragged:'),
   getRepeatTypeLabel: getRepeatTypeLabel,
-  handleEditEvent: (event: any) => console.log('Editing event:', event),
+  // handleEditEvent: (event: any) => console.log('Editing event:', event),
 };
 
 // --- Stories --- //

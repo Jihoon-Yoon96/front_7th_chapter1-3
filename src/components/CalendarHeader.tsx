@@ -4,7 +4,7 @@ import React from 'react';
 
 interface CalendarHeaderProps {
   view: 'week' | 'month';
-  setView: (view: 'week' | 'month') => void;
+  setView: () => void;
   onPrev: () => void;
   onNext: () => void;
 }

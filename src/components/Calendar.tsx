@@ -4,14 +4,14 @@ import React from 'react';
 import CalendarHeader from './CalendarHeader';
 import MonthView from './MonthView';
 import WeekView from './WeekView';
-import { Event, RepeatType } from '../types';
+import { Event } from '../types';
 
 export type CalendarView = 'month' | 'week';
 
 interface CalendarProps {
   // Props for CalendarHeader
   view: CalendarView;
-  setView: (view: CalendarView) => void;
+  setView: () => void;
   onPrev: () => void;
   onNext: () => void;
 
@@ -19,9 +19,9 @@ interface CalendarProps {
   currentDate: Date;
   events: Event[];
   notifiedEvents: string[];
-  editEventDateByDrag: (eventInfo: Partial<Event>) => Promise<void>;
-  getRepeatTypeLabel: (type: RepeatType) => string;
-  handleEditEvent: (event: Event) => void;
+  editEventDateByDrag: () => Promise<void>;
+  getRepeatTypeLabel: () => string;
+  handleEditEvent: () => void;
 
   // Props for MonthView only
   holidays: Record<string, string>;

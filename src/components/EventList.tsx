@@ -11,16 +11,16 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-import { Event, RepeatType } from '../types';
+import { Event } from '../types';
 
 interface EventListProps {
   searchTerm: string;
-  setSearchTerm: (term: string) => void;
+  setSearchTerm: () => void;
   filteredEvents: Event[];
   notifiedEvents: string[];
-  handleEditEvent: (event: Event) => void;
-  handleDeleteEvent: (event: Event) => void;
-  getRepeatTypeLabel: (type: RepeatType) => string;
+  handleEditEvent: () => void;
+  handleDeleteEvent: () => void;
+  getRepeatTypeLabel: () => string;
   notificationOptions: { value: number; label: string }[];
 }
 
