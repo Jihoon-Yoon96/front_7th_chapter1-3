@@ -11,7 +11,10 @@ interface NotificationCenterProps {
   setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>;
 }
 
-const NotificationCenter: React.FC<NotificationCenterProps> = ({ notifications, setNotifications }) => {
+const NotificationCenter: React.FC<NotificationCenterProps> = ({
+  notifications,
+  setNotifications,
+}) => {
   return (
     <>
       {notifications.length > 0 && (

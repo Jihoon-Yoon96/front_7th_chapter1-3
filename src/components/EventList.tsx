@@ -1,6 +1,16 @@
 import { Delete, Edit, Notifications, Repeat } from '@mui/icons-material';
-import { Box, FormControl, FormLabel, IconButton, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import React from 'react';
+
 import { Event, RepeatType } from '../types';
 
 interface EventListProps {
@@ -25,7 +35,11 @@ const EventList: React.FC<EventListProps> = ({
   notificationOptions,
 }) => {
   return (
-    <Stack data-testid="event-list" spacing={2} sx={{ width: '30%', height: '100%', overflowY: 'auto' }}>
+    <Stack
+      data-testid="event-list"
+      spacing={2}
+      sx={{ width: '30%', height: '100%', overflowY: 'auto' }}
+    >
       <FormControl fullWidth>
         <FormLabel htmlFor="search">일정 검색</FormLabel>
         <TextField
@@ -83,9 +97,8 @@ const EventList: React.FC<EventListProps> = ({
                 <Typography>
                   알림:{' '}
                   {
-                    notificationOptions.find(
-                      (option) => option.value === event.notificationTime
-                    )?.label
+                    notificationOptions.find((option) => option.value === event.notificationTime)
+                      ?.label
                   }
                 </Typography>
               </Stack>

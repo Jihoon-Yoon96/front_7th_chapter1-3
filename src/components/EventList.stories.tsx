@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import EventList from './EventList';
 import { Event, RepeatType } from '../types';
 
@@ -81,7 +82,7 @@ export const WithSearchTerm: Story = {
   args: {
     ...baseArgs,
     searchTerm: '반복',
-    filteredEvents: sampleEvents.filter(event => event.title.includes('반복')),
+    filteredEvents: sampleEvents.filter((event) => event.title.includes('반복')),
   },
 };
 

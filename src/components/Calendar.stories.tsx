@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import Calendar, { CalendarView } from './Calendar';
 import { Event, RepeatType } from '../types';
 
@@ -23,7 +24,10 @@ const generalEvent: Event = {
   startTime: '10:00',
   endTime: '11:00',
   repeat: { type: 'none', interval: 1 },
-  description: '', location: '', category: '업무', notificationTime: 0
+  description: '',
+  location: '',
+  category: '업무',
+  notificationTime: 0,
 };
 
 const recurringEvent: Event = {
@@ -33,7 +37,10 @@ const recurringEvent: Event = {
   startTime: '14:00',
   endTime: '15:00',
   repeat: { type: 'daily', interval: 1 },
-  description: '', location: '', category: '개인', notificationTime: 15
+  description: '',
+  location: '',
+  category: '개인',
+  notificationTime: 15,
 };
 
 const longTitleEvent: Event = {
@@ -43,7 +50,10 @@ const longTitleEvent: Event = {
   startTime: '16:00',
   endTime: '17:00',
   repeat: { type: 'none', interval: 1 },
-  description: '', location: '', category: '가족', notificationTime: 0
+  description: '',
+  location: '',
+  category: '가족',
+  notificationTime: 0,
 };
 
 const sampleHolidays = {
@@ -52,11 +62,16 @@ const sampleHolidays = {
 
 const getRepeatTypeLabel = (type: RepeatType) => {
   switch (type) {
-    case 'daily': return '일';
-    case 'weekly': return '주';
-    case 'monthly': return '개월';
-    case 'yearly': return '년';
-    default: return '';
+    case 'daily':
+      return '일';
+    case 'weekly':
+      return '주';
+    case 'monthly':
+      return '개월';
+    case 'yearly':
+      return '년';
+    default:
+      return '';
   }
 };
 

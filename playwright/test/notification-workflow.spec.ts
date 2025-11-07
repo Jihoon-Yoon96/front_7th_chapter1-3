@@ -9,7 +9,8 @@ test.describe('알림 노출 플로우', () => {
   test.beforeEach(async ({ page, request }) => {
     await goReset(request);
     const initialTime = new Date('2025-11-07');
-    await page.exposeFunction('getMockedTime', () => initialTime.toISOString());await page.goto('/');
+    await page.exposeFunction('getMockedTime', () => initialTime.toISOString());
+    await page.goto('/');
     await expect(page.getByRole('heading', { name: '일정 추가' })).toBeVisible();
     // 네트워크 안정화 상태 유지 (500ms 동안 새로운 네트워크 연결 요청이 없으면 'networkidle' 상태로 간주)
     await page.waitForLoadState('networkidle');

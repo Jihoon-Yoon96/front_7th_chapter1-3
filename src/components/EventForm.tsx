@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+
 import { Event, RepeatType } from '../types';
 
 interface EventFormProps {
@@ -87,12 +88,23 @@ const EventForm: React.FC<EventFormProps> = ({
 
       <FormControl fullWidth>
         <FormLabel htmlFor="title">제목</FormLabel>
-        <TextField id="title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <TextField
+          id="title"
+          size="small"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </FormControl>
 
       <FormControl fullWidth>
         <FormLabel htmlFor="date">날짜</FormLabel>
-        <TextField id="date" size="small" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <TextField
+          id="date"
+          size="small"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
       </FormControl>
 
       <Stack direction="row" spacing={2}>
@@ -136,7 +148,12 @@ const EventForm: React.FC<EventFormProps> = ({
 
       <FormControl fullWidth>
         <FormLabel htmlFor="location">위치</FormLabel>
-        <TextField id="location" size="small" value={location} onChange={(e) => setLocation(e.target.value)} />
+        <TextField
+          id="location"
+          size="small"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
       </FormControl>
 
       <FormControl fullWidth>
@@ -245,7 +262,12 @@ const EventForm: React.FC<EventFormProps> = ({
         </Select>
       </FormControl>
 
-      <Button data-testid="event-submit-button" onClick={addOrUpdateEvent} variant="contained" color="primary">
+      <Button
+        data-testid="event-submit-button"
+        onClick={addOrUpdateEvent}
+        variant="contained"
+        color="primary"
+      >
         {editingEvent ? '일정 수정' : '일정 추가'}
       </Button>
     </Stack>

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 import { goReset, createEvent, findEventByTitle } from './e2eHelpers';
 
 test.describe('검색 및 필터링 워크플로우', () => {

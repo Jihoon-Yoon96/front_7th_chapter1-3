@@ -11,11 +11,13 @@ export class PlaywrightDevPage {
     this.page = page;
     this.getStartedLink = page.locator('a', { hasText: 'Get started' });
     this.gettingStartedHeader = page.locator('h1', { hasText: 'Installation' });
-    this.pomLink = page.locator('li', {
-      hasText: 'Guides',
-    }).locator('a', {
-      hasText: 'Page Object Model',
-    });
+    this.pomLink = page
+      .locator('li', {
+        hasText: 'Guides',
+      })
+      .locator('a', {
+        hasText: 'Page Object Model',
+      });
     this.tocList = page.locator('article div.markdown ul > li > a');
   }
 

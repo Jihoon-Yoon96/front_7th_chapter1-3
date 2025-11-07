@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+
 import { Event, RepeatType } from '../types';
 import { formatDate, formatMonth, getEventsForDay, getWeeksAtMonth } from '../utils/dateUtils';
 
@@ -139,7 +140,9 @@ const MonthView: React.FC<MonthViewProps> = ({
                                       title={`${event.repeat.interval}${getRepeatTypeLabel(
                                         event.repeat.type
                                       )}마다 반복${
-                                        event.repeat.endDate ? ` (종료: ${event.repeat.endDate})` : ''
+                                        event.repeat.endDate
+                                          ? ` (종료: ${event.repeat.endDate})`
+                                          : ''
                                       }`}
                                     >
                                       <Repeat fontSize="small" />

@@ -1,5 +1,14 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography,
+} from '@mui/material';
 import React from 'react';
+
 import { Event } from '../types';
 
 interface OverlapDialogProps {
@@ -9,7 +18,12 @@ interface OverlapDialogProps {
   overlappingEvents: Event[];
 }
 
-const OverlapDialog: React.FC<OverlapDialogProps> = ({ open, onClose, onConfirm, overlappingEvents }) => {
+const OverlapDialog: React.FC<OverlapDialogProps> = ({
+  open,
+  onClose,
+  onConfirm,
+  overlappingEvents,
+}) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>일정 겹침 경고</DialogTitle>

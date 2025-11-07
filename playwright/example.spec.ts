@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+
 import { PlaywrightDevPage } from './playwright-dev-page';
 
 test('getting started should contain table of contents', async ({ page }) => {

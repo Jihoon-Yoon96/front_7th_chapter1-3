@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import NotificationCenter from './NotificationCenter';
 
 const meta: Meta<typeof NotificationCenter> = {

@@ -17,6 +17,7 @@
     "lint:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:tsc": "tsc --pretty",
     "lint": "pnpm lint:eslint && pnpm lint:tsc",
+    "lint:fix": "eslint . --ext ts,tsx --fix --report-unused-disable-directives",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_8ffcd3a5f582eb9"

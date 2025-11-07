@@ -1,5 +1,6 @@
-import React from 'react';
 import { Stack } from '@mui/material';
+import React from 'react';
+
 import CalendarHeader from './CalendarHeader';
 import MonthView from './MonthView';
 import WeekView from './WeekView';

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import OverlapDialog from './OverlapDialog';
 import { Event } from '../types';
 

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import RecurringEventDialog from './RecurringEventDialog';
 import { Event } from '../types';
 
@@ -29,9 +30,7 @@ export const Default: Story = {
     open: true,
     onClose: () => console.log('Dialog closed'),
     onConfirm: (editSingleOnly) =>
-      console.log(
-        `Confirmed: ${editSingleOnly ? 'Single instance' : 'Entire series'}`
-      ),
+      console.log(`Confirmed: ${editSingleOnly ? 'Single instance' : 'Entire series'}`),
     event: sampleEvent,
     mode: 'edit',
   },

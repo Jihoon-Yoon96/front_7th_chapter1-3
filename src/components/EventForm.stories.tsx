@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import EventForm from './EventForm';
 import { Event, RepeatType } from '../types';
 
