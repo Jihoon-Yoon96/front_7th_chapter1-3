@@ -46,7 +46,8 @@ export async function createEvent(page: Page, eventData: EventData) {
       1440: '1일 전',
       10080: '1주 전',
     };
-    await page.getByLabel('알림 설정').click();
+    // await page.getByLabel('알림 설정').click();
+    await page.locator('#notification').click();
     await page.getByRole('option', { name: notification[eventData.notificationTime] }).click();
   }
 
