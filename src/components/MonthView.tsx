@@ -73,7 +73,7 @@ const MonthView: React.FC<MonthViewProps> = ({
                         overflow: 'hidden',
                         position: 'relative',
                       }}
-                      data-testid="table-cell"
+                      data-testid={`cell-${weekIndex}-${dayIndex}`}
                       className="drag-target"
                       onDragOver={(e) => {
                         e.preventDefault();
